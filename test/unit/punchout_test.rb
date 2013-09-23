@@ -18,11 +18,8 @@ class Punchout::PunchableTest < ActiveSupport::TestCase
 
     mock_matcher_klass = mock
 
-    mock_matcher = mock
-    mock_matcher_klass.expects(:new).returns(mock_matcher)
-
     mock_puncher = mock
-    Punchout::Puncher.expects(:new).with(mock_matcher).returns(mock_puncher)
+    Punchout::Puncher.expects(:new).with(mock_matcher_klass).returns(mock_puncher)
 
     instance.matcher = mock_matcher_klass
     
