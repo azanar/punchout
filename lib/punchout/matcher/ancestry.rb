@@ -3,18 +3,12 @@ require 'punchout/matcher'
 module Punchout
   class Matcher
     class Ancestry < Matcher
-      def match(candidate)
-        candidates = @list.find_all {|k|
-          k >= candidate.class
-        }
-        
-        candidates.inject do |a, b| 
-          if a < b
-            a
-          else
-            b
-          end
-        end
+      def conflicts?(matcher)
+
+      end
+
+      def matches?(candidate)
+        (@subject >= candidate.class) == true
       end
     end
   end

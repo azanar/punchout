@@ -5,31 +5,35 @@ require 'punchout/puncher'
 class Punchout::PuncherTest < ActiveSupport::TestCase
   setup do
 
-    mock_matcher_klass = mock
+    @mock_matchables = mock
 
-    @mock_matcher = mock
-    mock_matcher_klass.expects(:new).returns(@mock_matcher)
-
-    @puncher = Punchout::Puncher.new(mock_matcher_klass)
+    @puncher = Punchout::Puncher.new
 
     @mock_type = mock
   end
 
-  test '#fetch no match' do
-    @mock_matcher.expects(:match).with(@mock_type).returns(nil)
+  test '#punch no match' do
+    @mock_matchables.expects(:find).with(@mock_type).returns(nil)
 
-    @puncher.fetch(@mock_type)
+    @puncher.instance_variable_set(:@matchables, @mock_matchables)
+
+    result = @puncher.punch(@mock_type)
+
+    assert_equal nil, result
   end
 
-  test '#fetch match located' do
-    mock_match = mock
+  test '#punch match located' do
+    mock_matchable = mock
 
-    mock_response = mock
+    @mock_matchables.expects(:find).with(@mock_type).returns(mock_matchable)
 
-    @puncher.add(mock_match, mock_response)
+    mock_thing = mock
+    mock_matchable.expects(:thing).returns(mock_thing)
 
-    @mock_matcher.expects(:match).with(@mock_type).returns(mock_match)
+    @puncher.instance_variable_set(:@matchables, @mock_matchables)
 
-    @puncher.fetch(@mock_type)
+    result = @puncher.punch(@mock_type)
+
+    assert_equal mock_thing, result
   end
 end

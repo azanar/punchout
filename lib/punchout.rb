@@ -1,4 +1,5 @@
 require 'punchout/puncher'
+require 'punchout/matcher/class'
 
 module Punchout
   module Punchable
@@ -9,10 +10,7 @@ module Punchout
     attr_accessor :matcher
 
     def puncher
-      if @matcher.nil?
-        raise "You need to set a matcher on your Punchable first!"
-      end
-      @puncher ||= Puncher.new(@matcher)
+      @puncher ||= Puncher.new
     end
 
     def punch(obj)

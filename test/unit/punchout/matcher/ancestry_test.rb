@@ -11,42 +11,36 @@ class Punchout::Matcher::AncestryTest < ActiveSupport::TestCase
     @derived_klass = Class.new(@base_klass)
 
     @independent_klass = Class.new
+
+    @mock_thing = mock
   end
 
   test "#match none" do
+    matcher = Punchout::Matcher::Ancestry.new(@derived_klass)
+    result = matcher.matches?(@independent_klass.new)
 
-    matcher = Punchout::Matcher::Ancestry.new([@base_klass, @derived_klass])
-    result = matcher.match(@independent_klass.new)
-
-    assert_equal nil, result
+    assert_equal false, result
   end
 
-  test "#match concrete level" do
-    matcher = Punchout::Matcher::Ancestry.new([@base_klass, @derived_klass])
-    result = matcher.match(@derived_klass.new)
+  test "#match should match equivalence" do
+    matcher = Punchout::Matcher::Ancestry.new(@base_klass)
+    result = matcher.matches?(@base_klass.new)
 
-    assert_equal @derived_klass, result
+    assert_equal true, result
   end
 
-  test "#match ancestry level" do
-    matcher = Punchout::Matcher::Ancestry.new([@base_klass])
-    result = matcher.match(@derived_klass.new)
+  test "#match should match descendant" do
+    matcher = Punchout::Matcher::Ancestry.new(@base_klass)
+    result = matcher.matches?(@derived_klass.new)
 
-    assert_equal @base_klass, result
+    assert_equal true, result
   end
 
-  test "#match ancestry level derived match" do
-    matcher = Punchout::Matcher::Ancestry.new([@derived_klass])
-    result = matcher.match(@base_klass.new)
+  test "#match should not match ancestor" do
+    matcher = Punchout::Matcher::Ancestry.new(@derived_klass)
+    result = matcher.matches?(@base_klass.new)
 
-    assert_equal nil, result
-  end
-
-  test "#match concrete level ancestry match" do
-    matcher = Punchout::Matcher::Ancestry.new([@base_klass])
-    result = matcher.match(@derived_klass.new)
-
-    assert_equal @base_klass, result
+    assert_equal false, result
   end
 end
 

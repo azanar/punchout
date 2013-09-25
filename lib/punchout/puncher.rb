@@ -1,20 +1,31 @@
+require 'punchout/puncher/matchable'
+require 'punchout/puncher/matchables'
+
 module Punchout
   class Puncher
-    def initialize(matcher)
-      @punchables = Set.new
-      @punches = {}
-      @matcher = matcher
+    def initialize
+      @matchables = Matchables.new
     end
 
-    def add(type, comparator)
-      @punchables << type
-      @punches[type] = comparator
+    def add(matchable)
+      if !matchable.kind_of?(Matchable)
+        raise
+      end
+
+      @matchables.add(matchable)
     end
 
-    def fetch(type)
-      match = @matcher.new(@punchables).match(type)
+    def can_punch?(type)
+      @matchables.include?(type)
+    end
 
-      @punches[match]
+    def punch(type)
+
+      match = @matchables.find(type)
+
+      if match
+        match.thing
+      end
     end
   end
 end
