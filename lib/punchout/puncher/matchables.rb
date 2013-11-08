@@ -15,7 +15,7 @@ module Punchout
       def include?(type)
         @matchables.any? do |p|
           p.matches?(type)
-        end.tap{|x| "FOUND #{p.inspect}"}
+        end
       end
 
       def find(type)
