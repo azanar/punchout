@@ -1,3 +1,9 @@
+
+[![Code Climate](https://codeclimate.com/github/azanar/punchout.png)](https://codeclimate.com/github/azanar/punchout)
+[![Build Status](https://travis-ci.org/azanar/punchout.png?branch=master)](https://travis-ci.org/azanar/punchout)
+[![Dependency Status](https://gemnasium.com/azanar/punchout.png)](https://gemnasium.com/azanar/punchout)
+[![Coverage Status](https://coveralls.io/repos/azanar/punchout/badge.png?branch=readme)](https://coveralls.io/r/azanar/punchout?branch=readme)
+
 punchout
 ========
 Punchout is an implementation of the [Registry pattern](http://martinfowler.com/eaaCatalog/registry.html) that tries to make as few assumptions as possible about what is being registered, and how it wants to be found.
