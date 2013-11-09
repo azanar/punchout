@@ -1,4 +1,5 @@
 require 'rake/testtask'
+require 'coveralls/rake/task'
 
 namespace :test do
   Rake::TestTask.new(:unit) do |t|
@@ -17,4 +18,8 @@ task :test do |tt|
   end
 end
 
-task :default => :test
+Coveralls::RakeTask.new
+
+task :test_with_coveralls => ['test:unit', 'test:integration', 'coveralls:push']
+
+task :default => :test_with_coveralls
