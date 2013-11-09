@@ -16,3 +16,5 @@ task :test do |tt|
     Rake::Task[t].execute
   end
 end
+
+task :default => :test
