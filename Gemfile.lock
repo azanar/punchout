@@ -1,15 +1,18 @@
 PATH
   remote: .
   specs:
-    punchout (0.0.2)
+    punchout (0.0.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    active_support (3.0.0)
+      activesupport (= 3.0.0)
+    activesupport (3.0.0)
     metaclass (0.0.1)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
-    multi_json (1.8.0)
+    multi_json (1.8.2)
     rake (10.1.0)
     simplecov (0.7.1)
       multi_json (~> 1.0)
@@ -20,6 +23,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_support
   mocha
   punchout!
   rake
