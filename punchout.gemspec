@@ -3,13 +3,13 @@ require 'pathname'
 Gem::Specification.new do |s|
   s.name        = "punchout"
   s.version     = "0.0.4"
-  s.summary     = "A gem"
+  s.summary     = "A flexible registry pattern gem"
+  s.description = "A flexible implementation of the Registry pattern, with an extensible finder/matcher mechanism."
 
   s.license     = "MIT"
 
   s.authors     = ["Ed Carrel"]
-  s.email       = ["ed@pocketchange.com"]
-  
+  s.email       = ["edward@carrel.org", "ed@pocketchange.com"]
 
   s.files       = Pathname.glob('lib/**/*.rb').map(&:to_path)
   s.files       += Pathname.glob('test/**/*.rb').map(&:to_path)
