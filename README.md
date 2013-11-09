@@ -1,4 +1,4 @@
-
+[![Gem Version](https://badge.fury.io/rb/punchout.png)](http://badge.fury.io/rb/punchout)
 [![Code Climate](https://codeclimate.com/github/azanar/punchout.png)](https://codeclimate.com/github/azanar/punchout)
 [![Build Status](https://travis-ci.org/azanar/punchout.png?branch=master)](https://travis-ci.org/azanar/punchout)
 [![Dependency Status](https://gemnasium.com/azanar/punchout.png)](https://gemnasium.com/azanar/punchout)
