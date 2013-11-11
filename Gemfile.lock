@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    punchout (0.0.4)
+    punchout (0.1.0)
 
 GEM
   remote: https://rubygems.org/
