@@ -37,6 +37,7 @@ GEM
     tins (0.13.1)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
