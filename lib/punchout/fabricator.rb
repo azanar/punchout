@@ -1,3 +1,5 @@
+require 'punchout/puncher'
+
 module Punchout
   class Fabricator
     def initialize(factory)
