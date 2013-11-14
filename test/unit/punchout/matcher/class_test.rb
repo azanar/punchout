@@ -3,7 +3,7 @@ require File.expand_path('../../../test_helper', __FILE__)
 
 require 'punchout/matcher/class'
 
-class Punchout::Matcher::KlassTest < ActiveSupport::TestCase
+class Punchout::Matcher::KlassTest < Test::Unit::TestCase
   setup do
     @ancestor_klass = Class.new
 

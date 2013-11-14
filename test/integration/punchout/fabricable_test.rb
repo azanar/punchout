@@ -3,7 +3,7 @@ require File.expand_path('../../test_helper', __FILE__)
 require 'punchout/fabricable'
 require 'punchout/matcher/class'
 
-class Punchout::Fabricator::Test < ActiveSupport::TestCase
+class Punchout::Fabricator::Test < Test::Unit::TestCase
   class Factory
     def initialize(pairings)
       @pairings = pairings

@@ -3,7 +3,7 @@ require File.expand_path('../../test_helper', __FILE__)
 require 'punchout/fabricator'
 require 'punchout/puncher'
 
-class Punchout::FabricatorTest < ActiveSupport::TestCase
+class Punchout::FabricatorTest < Test::Unit::TestCase
   setup do
     @mock_factory = mock
     @mock_puncher = mock

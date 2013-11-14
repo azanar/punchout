@@ -3,7 +3,7 @@ require File.expand_path('../test_helper', __FILE__)
 require 'punchout'
 require 'punchout/matcher/class'
 
-class Punchout::Test < ActiveSupport::TestCase
+class Punchout::Test < Test::Unit::TestCase
   setup do
     @punchout_klass = Class.new do
       include Punchout::Punchable

@@ -2,7 +2,7 @@ require File.expand_path('../../../test_helper', __FILE__)
 
 require 'punchout/puncher/matchables'
 
-class Punchout::Puncher::MatchablesTest < ActiveSupport::TestCase
+class Punchout::Puncher::MatchablesTest < Test::Unit::TestCase
   setup do
 
     @mock_matchables = 5.times.map {|x|

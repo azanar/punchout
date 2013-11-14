@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.files       = Pathname.glob('lib/**/*.rb').map(&:to_path)
   s.files       += Pathname.glob('test/**/*.rb').map(&:to_path)
 
-  s.add_development_dependency 'active_support' 
+  s.add_development_dependency 'test-unit' 
   s.add_development_dependency 'mocha' 
   s.add_development_dependency 'simplecov'
 end

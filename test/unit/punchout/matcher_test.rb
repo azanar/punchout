@@ -2,7 +2,7 @@ require File.expand_path('../../test_helper', __FILE__)
 
 require 'punchout/matcher'
 
-class Punchout::MatcherTest < ActiveSupport::TestCase
+class Punchout::MatcherTest < Test::Unit::TestCase
   setup do
     @mock_subject = mock
     @matcher = Punchout::Matcher.new(@mock_subject)

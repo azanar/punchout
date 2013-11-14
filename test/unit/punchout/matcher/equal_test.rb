@@ -3,7 +3,7 @@ require File.expand_path('../../../test_helper', __FILE__)
 
 require 'punchout/matcher/equal'
 
-class Punchout::Matcher::EqualTest < ActiveSupport::TestCase
+class Punchout::Matcher::EqualTest < Test::Unit::TestCase
   test "#match none" do
     matcher = Punchout::Matcher::Equal.new("foo")
     assert_equal false, matcher.matches?("bar")

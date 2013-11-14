@@ -12,7 +12,5 @@ if ENV["ENABLE_SIMPLE_COV"]
   end
 end
 
-require 'active_support/time'
-require 'active_support/test_case'
-require 'test/unit'
-
+require 'test/unit/testcase'
+require 'mocha/setup'
