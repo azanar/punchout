@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Punchout by azanar</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Punchout</h1>
+          <h2>A pluggable implementation of the Registry pattern in Ruby</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/azanar/punchout/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/azanar/punchout/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/azanar/punchout" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <p><a href="http://badge.fury.io/rb/punchout"><img src="https://badge.fury.io/rb/punchout.png" alt="Gem Version"></a>
+<a href="https://codeclimate.com/github/azanar/punchout"><img src="https://codeclimate.com/github/azanar/punchout.png" alt="Code Climate"></a>
+<a href="https://travis-ci.org/azanar/punchout"><img src="https://travis-ci.org/azanar/punchout.png?branch=master" alt="Build Status"></a>
+<a href="https://gemnasium.com/azanar/punchout"><img src="https://gemnasium.com/azanar/punchout.png" alt="Dependency Status"></a>
+<a href="https://coveralls.io/r/azanar/punchout?branch=readme"><img src="https://coveralls.io/repos/azanar/punchout/badge.png?branch=readme" alt="Coverage Status"></a></p>
+
+<h1>
+<a name="punchout" class="anchor" href="#punchout"><span class="octicon octicon-link"></span></a>punchout</h1>
+
+<p>Punchout is an implementation of the <a href="http://martinfowler.com/eaaCatalog/registry.html">Registry pattern</a> that tries to make as few assumptions as possible about what is being registered, and how it wants to be found.</p>
+
+<p>Punchout relies on the following three components to works its magic:</p>
+
+<ul>
+<li>A <code>Matcher</code>, which decides if a passed in values 'matches'.</li>
+<li>A <code>Matchable</code>, which will stores a value and a <code>Matcher</code>, and returns a value on a successful match.</li>
+<li>A <code>Punchable</code>, which is an extended module allowing for registration and lookup against <code>Matchable</code> objects.</li>
+</ul><h2>
+<a name="matchers" class="anchor" href="#matchers"><span class="octicon octicon-link"></span></a>Matchers</h2>
+
+<p>Several <code>Matcher</code> classes are provided, and it is very easy to define your own <code>Matcher</code> classes.</p>
+
+<p>An example matcher to determine if a particular value is awesome:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="k">class</span> <span class="nc">Awesomeness</span> <span class="o">&lt;</span> <span class="ss">Punchout</span><span class="p">:</span><span class="ss">:Matcher</span>
+  <span class="k">def</span> <span class="nf">matches?</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span>
+    <span class="n">thing</span><span class="o">.</span><span class="n">respond_to?</span><span class="p">(</span><span class="ss">:awesome?</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">thing</span><span class="o">.</span><span class="n">awesome?</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+<h2>
+<a name="matchable" class="anchor" href="#matchable"><span class="octicon octicon-link"></span></a>Matchable</h2>
+
+<p>A <code>Matchable</code> defines a relationship between a subclass of <code>Matcher</code> and a value to be returned.</p>
+
+<p>A <code>Matchable</code> can be created as follows for testing equality, using the built-in <code>Punchout::Matcher::Equal</code> matcher</p>
+
+<div class="highlight highlight-ruby"><pre><span class="nb">require</span> <span class="s1">'punchout/matcher/equal'</span>
+
+<span class="n">matcher</span> <span class="o">=</span> <span class="ss">Punchout</span><span class="p">:</span><span class="ss">:Matcher</span><span class="o">::</span><span class="no">Equal</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">matchable</span> <span class="o">=</span> <span class="ss">Punchout</span><span class="p">:</span><span class="ss">:Matchable</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">matcher</span><span class="p">,</span> <span class="s1">'meaning of life'</span><span class="p">)</span>
+</pre></div>
+
+<h2>
+<a name="punchable" class="anchor" href="#punchable"><span class="octicon octicon-link"></span></a>Punchable</h2>
+
+<p>Punchout allows you to declare modules as <code>Punchable</code>, </p>
+
+<p>like as follows:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="nb">require</span> <span class="s1">'punchout'</span>
+
+<span class="k">module</span> <span class="nn">Things</span>
+  <span class="n">extends</span> <span class="ss">Punchout</span><span class="p">:</span><span class="ss">:Punchable</span>
+
+  <span class="c1">#...other code...  </span>
+<span class="k">end</span>
+</pre></div>
+
+<p>This will make your module <code>Punchable</code>, but at this point, there is nothing registered to <code>punch</code>.</p>
+
+<p>When you extend something as <code>Punchable</code>, this exposes two new public methods: <code>#add</code> and <code>#punch</code>. </p>
+
+<ul>
+<li><p><code>puncher#add</code> is used to register a <code>Matchable</code> object against the Punchable module. </p></li>
+<li><p><code>#punch</code> returns the value attached to the first registered <code>Matchable</code> to match against the passed value.</p></li>
+</ul><h2>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<div class="highlight highlight-ruby"><pre><span class="nb">require</span> <span class="s1">'punchout'</span>
+
+<span class="k">module</span> <span class="nn">Things</span>
+  <span class="n">extends</span> <span class="ss">Punchout</span><span class="p">:</span><span class="ss">:Punchable</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span>
+    <span class="n">puncher</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">thing</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">thing</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="c1">#...other code...  </span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Thing</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+  <span class="k">end</span>
+
+  <span class="kp">attr_reader</span> <span class="ss">:name</span>
+<span class="k">end</span>
+
+<span class="n">thing1</span> <span class="o">=</span> <span class="no">Thing</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">"thing1"</span><span class="p">)</span>
+<span class="n">thing2</span> <span class="o">=</span> <span class="no">Thing</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">"thing2"</span><span class="p">)</span>
+
+<span class="no">Things</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">thing1</span><span class="p">)</span>
+<span class="no">Things</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">thing2</span><span class="p">)</span>
+
+<span class="no">Things</span><span class="o">.</span><span class="n">punch</span><span class="p">(</span><span class="s2">"thing2"</span><span class="p">)</span> <span class="c1"># returns thing2</span>
+<span class="no">Things</span><span class="o">.</span><span class="n">punch</span><span class="p">(</span><span class="s2">"thing3"</span><span class="p">)</span> <span class="c1"># returns nil</span>
+</pre></div>
+
+<h2>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
+
+<p>See <a href="CONTRIBUTING.md">Contributing</a> for details.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>See <a href="LICENSE">License</a> for details.</p>
+
+<h2>
+<a name="copyright" class="anchor" href="#copyright"><span class="octicon octicon-link"></span></a>Copyright</h2>
+
+<p>©2013 Ed Carrel and Pocket Change</p>
+        </section>
+
+        <footer>
+          Punchout is maintained by <a href="https://github.com/azanar">azanar</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
