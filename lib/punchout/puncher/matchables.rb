@@ -24,6 +24,10 @@ module Punchout
         end
       end
 
+      def all
+        @matchables
+      end
+
       private
 
       def conflicts?(matchable)

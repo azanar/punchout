@@ -65,4 +65,9 @@ class Punchout::Puncher::MatchablesTest < Test::Unit::TestCase
 
     assert_equal @mock_matchables.last, result
   end
+
+  test '#all' do
+    result = @matchables.all
+    assert_equal @mock_matchables, result
+  end
 end

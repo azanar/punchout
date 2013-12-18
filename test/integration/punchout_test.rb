@@ -36,4 +36,22 @@ class Punchout::Test < Test::Unit::TestCase
     result = puncher.punch(expected_matching_instance)
     assert_equal expected[:punchable],result
   end
+
+  test "#all" do
+    punchout = @punchout_klass.new
+    puncher = punchout.puncher
+
+    @pairings.each do |p|
+      matcher = Punchout::Matcher::Klass.new(p[:match])
+
+      matchable = matcher.punches(p[:punchable])
+
+      puncher.add(matchable)
+    end
+
+    expected = @pairings.map {|p| p[:punchable]}
+
+    result = puncher.all
+    assert_equal expected,result
+  end
 end

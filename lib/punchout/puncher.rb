@@ -19,6 +19,12 @@ module Punchout
       @matchables.include?(type)
     end
 
+    def all
+      @matchables.all.map do |m|
+        m.thing
+      end
+    end
+
     def punch(type)
 
       match = @matchables.find(type)
