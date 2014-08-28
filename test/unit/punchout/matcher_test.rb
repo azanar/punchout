@@ -5,7 +5,10 @@ require 'punchout/matcher'
 class Punchout::MatcherTest < Test::Unit::TestCase
   setup do
     @mock_subject = mock
-    @matcher = Punchout::Matcher.new(@mock_subject)
+    @mock_matcher = Class.new do
+      include Punchout::Matcher
+    end
+    @matcher = @mock_matcher.new(@mock_subject)
   end
 
   test "#punches" do

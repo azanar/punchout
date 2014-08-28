@@ -1,9 +1,10 @@
 require 'punchout/matcher'
 
 module Punchout
-  class Matcher
-    class Equal < Matcher
+  module Matcher
+    class Equal
 
+      include Punchout::Matcher
 
       def matches?(candidate)
         @subject == candidate

@@ -1,9 +1,10 @@
 require 'punchout/matcher'
 
 module Punchout
-  class Matcher
-    class Progeny < Matcher
+  module Matcher
+    class Progeny
 
+      include Punchout::Matcher
 
       def matches?(candidate)
         (@subject <= candidate.class) == true

@@ -1,9 +1,9 @@
 require 'punchout/matcher'
 
 module Punchout
-  class Matcher
-    class Ancestry < Matcher
+  module Matcher
 
+      include Punchout::Matcher
 
       def matches?(candidate)
         (@subject >= candidate.class) == true

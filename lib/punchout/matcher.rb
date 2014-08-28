@@ -1,7 +1,6 @@
 require 'punchout/puncher/matchable'
 
 module Punchout
-  class Matcher
     def initialize(subject)
       @subject = subject
     end
