@@ -1,5 +1,10 @@
 module Punchout
   class Puncher
+    # Sanity checks and stores the Matchables behind a {Puncher}
+    #
+    # @note If two matchers would trigger on the item passed, the first
+    #  matcher added wins.
+    #
     class Matchables
       def initialize
         @matchables = []
