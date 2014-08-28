@@ -1,7 +1,7 @@
 language: ruby
 
 env:
-  - TEST_SUITE=units
+  - TEST_SUITE=unit
   - TEST_SUITE=integration
 
 script: "bundle exec rake test:$TEST_SUITE"

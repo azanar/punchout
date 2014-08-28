@@ -47,6 +47,10 @@ module Punchout
         match.thing
       end
     end
+
+    def punch!(type)
+      punch(type) or raise
+    end
   end
 end
 
