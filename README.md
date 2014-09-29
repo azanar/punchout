@@ -42,7 +42,7 @@ require 'punchout/matcher/equal'
 
 matcher = Punchout::Matcher::Equal(42)
 
-matchable = Punchout::Matchable.new(matcher, 'meaning of life')
+matchable = Punchout::Puncher::Matchable.new(matcher, 'meaning of life')
 ```
 
 Punchable
