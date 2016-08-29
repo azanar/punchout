@@ -9,6 +9,6 @@ script: "bundle exec rake test:$TEST_SUITE"
 rvm:
   - "2.3.1"
   - "ruby-head"
-  - "jruby"
+  - "jruby-9.1.2.0"
   - "rbx"
 
